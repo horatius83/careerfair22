@@ -53,13 +53,10 @@ def translate_and_scale(a: Tuple[float, float]) -> Tuple[float, float]:
     x, y = [OFFSET_X + SCALING_FACTOR * b for b in a]
     return (x,y)
 
-def get_random_color() -> List[float]:
-    return [random.random() for _ in range(3)]
-
 def get_color(x: float, y: float) -> List[float]:
     """Given a point on the screen generate a color"""
     def sine_wave_conversion(t: float) -> float:
-        return 0.5 * (1.0 + math.sin((2.0 * math.pi) / SCALING_FACTOR))
+        return 0.5 * (1.0 + math.sin(((2.0 * math.pi) / SCALING_FACTOR) * t))
     # 2 * pi = 250x, (2 * pi) / 250 = x
     #r = min(1.0, abs(x / 500.0))
     r = sine_wave_conversion(y)
@@ -86,6 +83,7 @@ for i in range(N_DOTS):
     dot(5)
     print(f'{i} of {N_DOTS}')
 done()
+print('Done!')
 
 # %%
 import math
@@ -93,7 +91,9 @@ import math
 SCALING_FACTOR = 500.0
 
 def sine_wave_conversion(t: float) -> float:
-    return 0.5 * (1.0 + math.sin((2.0 * math.pi) / SCALING_FACTOR))
+    # y = mx + b
+    # (0, 0), (500, 2 * pi)
+    return 0.5 * (1.0 + math.sin(((2.0 * math.pi) / SCALING_FACTOR) * t))
 
-[sine_wave_conversion(x) for x in range(500)]
+[sine_wave_conversion(x - 250) for x in range(500)]
 # %%
