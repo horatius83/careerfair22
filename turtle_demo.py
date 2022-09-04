@@ -57,12 +57,8 @@ def get_color(x: float, y: float) -> List[float]:
     """Given a point on the screen generate a color"""
     def sine_wave_conversion(t: float) -> float:
         return 0.5 * (1.0 + math.sin(((2.0 * math.pi) / SCALING_FACTOR) * t))
-    # 2 * pi = 250x, (2 * pi) / 250 = x
-    #r = min(1.0, abs(x / 500.0))
     r = sine_wave_conversion(y)
-    #g = min(1.0, abs(y / 500.0))
     g = sine_wave_conversion(y + (SCALING_FACTOR / 3.0))
-    #b = min(1.0, abs((y + 128) / 500.0))
     b = sine_wave_conversion(y + (2.0 * SCALING_FACTOR / 3.0))
     return [r, g, b]
 
